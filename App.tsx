@@ -1,7 +1,7 @@
 import { Navigator } from './src/navigator/navigator';
-import { queryClientWrapper } from './src/components/queryClient/queryClient';
+import { appWrapper } from './src/components/appWrapper/appWrapper';
 
 export default function App() {
-    const QueryClientWrapper = queryClientWrapper(Navigator);
-    return <QueryClientWrapper />;
+    const AppWrapper = appWrapper(Navigator);
+    return <AppWrapper />;
 }

@@ -1,19 +1,20 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
-import { Text } from 'react-native';
+import { SplashScreen } from '../screens/splashScreen/splashScreen';
 //app navigator
 export function Navigator() {
     const Stack = createNativeStackNavigator();
     const Tab = createBottomTabNavigator();
 
-    function Hello() {
-        return <Text>Hello</Text>;
-    }
     return (
         <NavigationContainer>
             <Stack.Navigator>
-                <Stack.Screen component={Hello} name="hello" />
+                <Stack.Screen
+                    component={SplashScreen}
+                    name="splashScreen"
+                    options={{ headerShown: false }}
+                />
             </Stack.Navigator>
         </NavigationContainer>
     );
