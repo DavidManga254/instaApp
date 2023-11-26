@@ -1,5 +1,6 @@
-import { PermissionsAndroid, Text } from 'react-native';
+import { PermissionsAndroid, Text, StyleSheet } from 'react-native';
 import { useEffect } from 'react';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export function SplashScreen() {
     useEffect(() => {
@@ -14,5 +15,14 @@ export function SplashScreen() {
         })();
     }, []);
 
-    return <Text>This will be splashscreen</Text>;
+    return (
+        <SafeAreaView>
+            <Text style={styles.text}>This will be splashscreen</Text>
+        </SafeAreaView>
+    );
 }
+const styles = StyleSheet.create({
+    text: {
+        color: 'red',
+    },
+});

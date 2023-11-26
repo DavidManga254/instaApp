@@ -5,9 +5,7 @@ export function appWrapper(WrappedComponent: any) {
         const queryClient = new QueryClient();
         return (
             <QueryClientProvider client={queryClient}>
-                <SafeAreaView>
-                    <WrappedComponent />
-                </SafeAreaView>
+                <WrappedComponent />
             </QueryClientProvider>
         );
     };
