@@ -17,7 +17,7 @@ export function SplashScreen() {
 
     return (
         <SafeAreaView>
-            <Text style={styles.text}>This will be splashscreen</Text>
+            <Text style={styles.text}>This will be splashsc</Text>
         </SafeAreaView>
     );
 }
