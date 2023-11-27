@@ -8,4 +8,5 @@ export const appStrings: appStringInterface = {
     email: 'Your email',
     password: 'Your password',
     login: 'login',
+    forgotPassword: 'Forgot password?',
 };

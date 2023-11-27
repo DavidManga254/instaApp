@@ -2,38 +2,93 @@ import { Text, View, StyleSheet, Image } from 'react-native';
 import { appStrings } from '../../constants/appStrings';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { TextInput, Button } from 'react-native-paper';
-
+import { useState } from 'react';
+import { userDetails } from './interfaces';
+import { KeyboardAvoidingView } from 'react-native';
+import { Platform } from 'react-native';
+import { ScrollView } from 'react-native';
 export function LoginScreen() {
+    const [userDetails, setUserDetails] = useState<userDetails>({
+        email: '',
+        password: '',
+    });
+    const [secureText, setSecureText] = useState<boolean>(true);
     return (
         <SafeAreaView>
-            <View style={styles.screen}>
-                <View style={styles.childView}>
-                    <Text style={styles.loginTopic}>{appStrings.loginTopic}</Text>
-                    <Text style={styles.loginIntro}>{appStrings.logInIntro}</Text>
+            <KeyboardAvoidingView
+                behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+                enabled={false}
+            >
+                <View style={styles.screen}>
+                    <View style={styles.childView}>
+                        <Text style={styles.loginTopic}>{appStrings.loginTopic}</Text>
+                        <Text style={styles.loginIntro}>{appStrings.logInIntro}</Text>
+                    </View>
+                    <View style={styles.googleIconView}>
+                        <Image
+                            style={styles.googleIconImage}
+                            source={require('../../../assets/googleIcon.jpg')}
+                        />
+                    </View>
+                    <Text style={styles.or}>{appStrings.or}</Text>
+                    <View style={styles.emailForm}>
+                        <Text style={styles.formLabel}>{appStrings.email}</Text>
+                        <TextInput
+                            onChangeText={(value) => {
+                                setUserDetails((previous) => {
+                                    return {
+                                        ...previous,
+                                        email: value,
+                                    };
+                                });
+                            }}
+                            mode={'flat'}
+                            outlineColor="transparent"
+                        />
+                    </View>
+                    <View style={styles.emailForm}>
+                        <Text style={styles.formLabel}>{appStrings.password}</Text>
+                        <TextInput
+                            right={
+                                <TextInput.Icon
+                                    onTouchEnd={() => setSecureText(!secureText)}
+                                    icon={secureText ? 'eye' : 'eye-off'}
+                                />
+                            }
+                            secureTextEntry={secureText}
+                            onChangeText={(value) => {
+                                setUserDetails((previous) => {
+                                    return {
+                                        ...previous,
+                                        password: value,
+                                    };
+                                });
+                            }}
+                            mode={'flat'}
+                            outlineColor="transparent"
+                        />
+                    </View>
                 </View>
-                <View style={styles.googleIconView}>
-                    <Image
-                        style={styles.googleIconImage}
-                        source={require('../../../assets/googleIcon.jpg')}
-                    />
+
+                <View style={styles.buttonView}>
+                    <View style={styles.centerView}>
+                        <Button
+                            disabled={
+                                userDetails.email.length == 0 || userDetails.password.length == 0
+                                    ? true
+                                    : false
+                            }
+                            buttonColor="#24786D"
+                            labelStyle={{ fontSize: 20 }}
+                            style={styles.buttonChild}
+                            mode="contained"
+                        >
+                            {appStrings.login}
+                        </Button>
+                    </View>
+                    <Text style={styles.forgot}>{appStrings.forgotPassword}</Text>
                 </View>
-                <Text style={styles.or}>{appStrings.or}</Text>
-                <View style={styles.emailForm}>
-                    <Text style={styles.formLabel}>{appStrings.email}</Text>
-                    <TextInput mode={'flat'} outlineColor="transparent" />
-                </View>
-                <View style={styles.emailForm}>
-                    <Text style={styles.formLabel}>{appStrings.password}</Text>
-                    <TextInput mode={'flat'} outlineColor="transparent" />
-                </View>
-            </View>
-            <View style={styles.buttonView}>
-                <View style={styles.centerView}>
-                    <Button style={styles.buttonChild} mode="contained">
-                        {appStrings.login}
-                    </Button>
-                </View>
-            </View>
+            </KeyboardAvoidingView>
         </SafeAreaView>
     );
 }
@@ -47,7 +102,7 @@ const styles = StyleSheet.create({
     },
     childView: {
         width: '100%',
-        paddingTop: '20%',
+        paddingTop: '5%',
     },
     loginIntro: {
         textAlign: 'center',
@@ -57,13 +112,13 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold',
         color: '#000E08',
-        marginBottom: '5%',
+        marginBottom: '3%',
     },
     googleIconView: {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: '5%',
+        marginTop: '3%',
         width: '100%',
     },
     googleIconImage: {
@@ -91,6 +146,7 @@ const styles = StyleSheet.create({
     },
     buttonChild: {
         width: '80%',
+        fontSize: 40,
     },
     centerView: {
         width: '100%',
@@ -98,5 +154,11 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         marginBottom: '5%',
+    },
+    forgot: {
+        textAlign: 'center',
+        marginBottom: '10%',
+        color: '#24786D',
+        fontWeight: '500',
     },
 });
