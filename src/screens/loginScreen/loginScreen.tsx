@@ -7,7 +7,7 @@ import { userDetails } from './interfaces';
 import { KeyboardAvoidingView } from 'react-native';
 import { Platform } from 'react-native';
 import { ScrollView } from 'react-native';
-export function LoginScreen() {
+export function LoginScreen(props: { navigation: any }) {
     const [userDetails, setUserDetails] = useState<userDetails>({
         email: '',
         password: '',
@@ -73,6 +73,7 @@ export function LoginScreen() {
                 <View style={styles.buttonView}>
                     <View style={styles.centerView}>
                         <Button
+                            onPress={() => props.navigation.navigate('homeScreen')}
                             disabled={
                                 userDetails.email.length == 0 || userDetails.password.length == 0
                                     ? true

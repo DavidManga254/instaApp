@@ -3,6 +3,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import { SplashScreen } from '../screens/splashScreen/splashScreen';
 import { LoginScreen } from '../screens/loginScreen/loginScreen';
+import { HomeScreen } from '../screens/chatScreen/homeScreen';
 //app navigator
 export function Navigator() {
     const Stack = createNativeStackNavigator();
@@ -19,6 +20,11 @@ export function Navigator() {
                 <Stack.Screen
                     component={LoginScreen}
                     name="loginScreen"
+                    options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                    component={HomeScreen}
+                    name="homeScreen"
                     options={{ headerShown: false }}
                 />
             </Stack.Navigator>
