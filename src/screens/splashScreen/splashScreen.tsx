@@ -1,16 +1,29 @@
 import { PermissionsAndroid, Text, StyleSheet, View, Image } from 'react-native';
 import { useEffect } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import * as Contacts from 'expo-contacts';
 
 export function SplashScreen(props: { navigation: any }) {
     useEffect(() => {
         (async () => {
-            const isGranted: boolean = await PermissionsAndroid.check(
+            const isNotificationsGranted: boolean = await PermissionsAndroid.check(
                 PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS,
             );
 
-            if (!isGranted) {
+            const isContactGranted: boolean = await PermissionsAndroid.check(
+                PermissionsAndroid.PERMISSIONS.READ_CONTACTS,
+            );
+
+            if (!isNotificationsGranted) {
                 await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS);
+                setTimeout(() => {
+                    props.navigation.navigate('loginScreen');
+                }, 2000);
+            } else if (!isContactGranted) {
+                await await Contacts.requestPermissionsAsync();
+                setTimeout(() => {
+                    props.navigation.navigate('loginScreen');
+                }, 2000);
             } else {
                 setTimeout(() => {
                     props.navigation.navigate('loginScreen');
