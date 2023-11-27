@@ -1,5 +1,4 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import { SplashScreen } from '../screens/splashScreen/splashScreen';
 import { LoginScreen } from '../screens/loginScreen/loginScreen';
@@ -7,7 +6,6 @@ import { HomeScreen } from '../screens/chatScreen/homeScreen';
 //app navigator
 export function Navigator() {
     const Stack = createNativeStackNavigator();
-    const Tab = createBottomTabNavigator();
 
     return (
         <NavigationContainer>

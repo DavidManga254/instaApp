@@ -10,6 +10,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { LoginScreen } from '../loginScreen/loginScreen';
 import { MaterialCommunityIcons } from 'expo-vector-icons';
 import { AntDesign } from '@expo/vector-icons';
+import { ContactsScreen } from '../contactsScreen/contactsScreen';
 export function HomeScreen(props: { navigation: any }) {
     const Tab = createBottomTabNavigator();
 
@@ -35,7 +36,7 @@ export function HomeScreen(props: { navigation: any }) {
                 }}
             />
             <Tab.Screen
-                component={LoginScreen}
+                component={ContactsScreen}
                 name="Contacts"
                 options={{
                     headerShown: false,

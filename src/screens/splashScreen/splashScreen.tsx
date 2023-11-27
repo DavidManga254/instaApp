@@ -6,20 +6,24 @@ import * as Contacts from 'expo-contacts';
 export function SplashScreen(props: { navigation: any }) {
     useEffect(() => {
         (async () => {
+            //does app have notifications access
             const isNotificationsGranted: boolean = await PermissionsAndroid.check(
                 PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS,
             );
 
+            //does app have access to read contacts
             const isContactGranted: boolean = await PermissionsAndroid.check(
                 PermissionsAndroid.PERMISSIONS.READ_CONTACTS,
             );
 
             if (!isNotificationsGranted) {
+                //request notifications permission
                 await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS);
                 setTimeout(() => {
                     props.navigation.navigate('loginScreen');
                 }, 2000);
             } else if (!isContactGranted) {
+                //request contacts permission
                 await await Contacts.requestPermissionsAsync();
                 setTimeout(() => {
                     props.navigation.navigate('loginScreen');

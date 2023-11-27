@@ -9,4 +9,6 @@ export const appStrings: appStringInterface = {
     password: 'Your password',
     login: 'login',
     forgotPassword: 'Forgot password?',
+    selectContact: 'Select contacts',
+    contacts: 'contacts',
 };
