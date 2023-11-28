@@ -2,6 +2,8 @@ import { PermissionsAndroid, Text, StyleSheet, View, Image } from 'react-native'
 import { useEffect } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import * as Contacts from 'expo-contacts';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { appKeys } from '../../constants/keys';
 
 export function SplashScreen(props: { navigation: any }) {
     useEffect(() => {
@@ -16,6 +18,9 @@ export function SplashScreen(props: { navigation: any }) {
                 PermissionsAndroid.PERMISSIONS.READ_CONTACTS,
             );
 
+            // does app have messsaging token
+            const messageToken = await AsyncStorage.getItem(appKeys.messageToken);
+
             if (!isNotificationsGranted) {
                 //request notifications permission
                 await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS);
@@ -28,6 +33,7 @@ export function SplashScreen(props: { navigation: any }) {
                 setTimeout(() => {
                     props.navigation.navigate('loginScreen');
                 }, 2000);
+            } else if (messageToken === null) {
             } else {
                 setTimeout(() => {
                     props.navigation.navigate('loginScreen');
